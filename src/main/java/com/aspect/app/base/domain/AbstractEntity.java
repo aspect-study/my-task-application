@@ -4,6 +4,8 @@ import jakarta.persistence.MappedSuperclass;
 import org.jspecify.annotations.Nullable;
 import org.springframework.data.util.ProxyUtils;
 
+import java.util.Objects;
+
 @MappedSuperclass
 public abstract class AbstractEntity<ID> {
 
@@ -37,8 +39,8 @@ public abstract class AbstractEntity<ID> {
             return false;
         }
 
-        var id = getId();
-        return id != null && id.equals(((AbstractEntity<?>) obj).getId());
+        var id = Objects.requireNonNull(getId());
+        return id.equals(((AbstractEntity<?>) obj).getId());
     }
 
 }
